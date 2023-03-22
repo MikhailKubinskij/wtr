@@ -1,0 +1,17 @@
+<h3>{{ heading_title }}</h3>
+<div class="row product-layout">
+  <div class="og-container">
+    {% for album in albums %}
+    <div class="og-album {{ apr }} col-xs-6" style="height:{{ mheight }};">
+      <div class="og-album-{{ og_album_image_type }}-{{ as }}">
+          <a href="{{ album.href }}"><img src="{{ album.thumb}}" title="{{ album.name }}" alt="{{ album.name }}"/></a>
+      </div>
+      <p>
+      <a href="{{ album.href }}" style="font-family:{{ title_font }}; font-size:{{ title_size }}px; {% if og_title_font_weight %} {{ 'font-weight: bold;' }} {% endif %}">
+      {{ album.name }}
+      </a>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>

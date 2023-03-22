@@ -1,0 +1,1407 @@
+{% if categories %}
+  <div class="header-nav__submenu header-submenu">
+    <div class="header-nav__container">
+      <div class="header-nav__submenu__content container">
+        <div class="header-nav__catalog">
+          <div class="header-nav__catalog__menu">
+            <div class="header-submenu__col header-submenu__leftside header-submenu__col--grey">
+              <div class="header-submenu__parent">
+                <div class="header-nav__catalog__list">
+                  <ul class="header-submenu__list">
+                    {% for category in categories %}
+                      <li class="header-submenu__item" data-id="{{ category.category_id }}">
+                        <a href="{{ category.href }}" class="header-submenu__link category-link">
+                          {% if category.image %}
+                            <img src="{{ category.image }}" alt="{{ category.name }}" class="img-responsive"/>
+                          {% endif %}
+                          <span>{{ category.name }}</span>
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="header-submenu__col header-submenu__rightside header-submenu__col--white">
+              {% for category in categories %}
+                {% if category.children %}
+                  <div class="header-submenu__block" id="block-category-mobile{{ category.category_id }}" data-id="{{ category.category_id }}">
+                    <div class="header-submenu__title">{{ category.name }}</div>
+                    <div class="header-submenu__container">
+                      {% for children in category.children|batch(category.children|length) %}
+                        <div class="header-submenu__inner row">
+                          {% for child in children %}
+                            {% if child.gchildren %}
+                              <div class="header-submenu__column col-sm-6 col-md-4 col-lg-3">
+                                <div class="header-submenu__info">
+                                  {% if child.image %}
+                                    <div class="header-submenu__image">
+                                      <img src="{{ child.image }}" alt="{{ child.name }}" title="{{ child.name }}" class="img-thumbnail"/>
+                                    </div>
+                                  {% endif %}
+                                  <div class="header-submenu__child">
+                                    <a href="{{ child.href }}" class="submenu-link link-bold">{{ child.name }}</a>
+                                    <div class="header-submenu__children"></div>
+                                  </div>
+                                </div>
+                              </div>
+                            {% else %}
+                              <div class="header-submenu__column col-sm-6 col-md-4 col-lg-3">
+                                <div class="header-submenu__info">
+                                  {% if child.image %}
+                                    <div class="header-submenu__image">
+                                      <img src="{{ child.image }}" alt="{{ child.name }}" title="{{ child.name }}" class="img-thumbnail"/>
+                                    </div>
+                                  {% endif %}
+                                  <div class="header-submenu__child">
+                                    <a href="{{ child.href }}" class="submenu-link link-bold">{{ child.name }}</a>
+                                  </div>
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-catalog catalog-category">
+    <div class="mobile-catalog__panel">
+      <div class="mobile-catalog__push">
+        <div class="FxW4"></div>
+      </div>
+      <div class="mobile-catalog__title">{{ text_catalog }}</div>
+      <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+        <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+          <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-catalog__inner">
+      <ul class="mobile-catalog__list" id="block-category-mffobile{{ category.category_id }}">
+        {% for category in categories %}
+          {% if category.children %}
+            <li class="mobile-catalog__item has-item">
+              <div class="mobile-item">
+                {% if category.image %}
+                  <div class="kMP8 mobile-catalog__image">
+                    <img src="{{ category.image }}" alt="{{ category.name }}" class="mobile-catalog__img">
+                  </div>
+                {% endif %}
+                <div class="mobile-catalog__name">{{ category.name }}</div>
+                <div class="ULo6 mobile-catalog__icon__arrow d-flex">
+                  <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+                    <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="mobile-catalog catalog-children">
+                <div class="mobile-catalog__panel">
+                  <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                    </svg>
+                  </button>
+                  <div class="mobile-catalog__title">{{ category.name }}</div>
+                  <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+                    <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+                      <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                      <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="mobile-catalog__inner">
+                  {% for children in category.children|batch(category.children|length) %}
+                    <ul class="mobile-catalog__list" id="block-category-fmobile{{ category.category_id }}">
+                      <li class="mobile-catalog__item mobile-catalog__all" id="block-categoryffg-fmobile{{ category.category_id }}">
+                        <span class="mobile-item mobile-item mobile-catalog__link" mobilecatcatalogid="{{ category.category_id }}" data-link="{{ category.href }}">
+                          <span class="mobile-catalog__name">{{ text_see_all_products }}</span>
+                        </span>
+                      </li>
+                      {% for child in children %}
+                        {% if child.gchildren %}
+                          <li class="mobile-catalog__item has-item">
+                            <span class="mobile-item">
+                              <span class="mobile-catalog__name">{{ child.name }}</span>
+                              <span class="mobile-catalog__icon__arrow d-flex">
+                                <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+                                  <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+                                </svg>
+                              </span>
+                            </span>
+                            <div class="mobile-catalog catalog-child">
+                              <div class="mobile-catalog__panel">
+                                <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                                  </svg>
+                                </button>
+                                <div class="mobile-catalog__title">{{ child.name }}</div>
+                                <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+                                  <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+                                    <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                                    <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+                                  </svg>
+                                </button>
+                              </div>
+                              <div class="mobile-catalog__inner">
+                                <ul class="mobile-catalog__list" id="block-category-dmobile{{ category.category_id }}">
+                                  <li class="mobile-catalog__item mobile-catalog__all">
+                                    <span class="mobile-item mobile-item mobile-catalog__link" data-link="{{ child.href }}" mobilecatcatalogchildid="{{ child.category_id }}">
+                                      <span class="mobile-catalog__name">{{ text_see_all_products }}</span>
+                                    </span>
+                                  </li>
+                                  {% for gchild in child.gchildren %}
+                                    <li class="mobile-catalog__item">
+                                      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="{{ gchild.href }}">
+                                        <span class="mobile-catalog__name">{{ gchild.name }}
+                                          {{ child.count }}</span>
+                                      </span>
+                                    </li>
+                                  {% endfor %}
+                                </ul>
+                              </div>
+                            </div>
+                          </li>
+                        {% else %}
+                          <li class="mobile-catalog__item">
+                            <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="{{ child.href }}" mobilecatcatalogchildid="{{ child.category_id }}">
+                              <span class="mobile-catalog__name">{{ child.name }}</span>
+                            </span>
+                          </li>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  {% endfor %}
+                </div>
+              </div>
+            </li>
+          {% else %}
+            <li class="mobile-catalog__item">
+              <div class="mobile-item mobile-item mobile-catalog__link" mobilecatcatalogid="{{ category.category_id }}" data-link="{{ category.href }}">
+                {% if category.image %}
+                  <div class="mobile-catalog__image">
+                    <img src="{{ category.image }}" alt="{{ category.name }}" class="mobile-catalog__img">
+                  </div>
+                {% endif %}
+                <div class="mobile-catalog__name">{{ category.name }}
+                  {{ child.count }}</div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+<div style="display:none;">
+  <li class="visible-xs content-mobile-menu-dveri" id="fordvericateg">
+
+<ul class="mobile-catalog__list mobile-catalog_main">
+  <li class="mobile-catalog__item has-item">
+  <span class="mobile-item">
+    <span class="mobile-catalog__name">По материалу</span>
+    <span class="mobile-catalog__icon__arrow d-flex">
+      <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+        <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+      </svg>
+    </span>
+  </span>
+  <div class="mobile-catalog catalog-child">
+    <div class="mobile-catalog__panel">
+      <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+        </svg>
+      </button>
+      <div class="mobile-catalog__title">Подбор дверей по материалу</div>
+      <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+        <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+          <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-catalog__inner">
+      <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-emal">
+          <span class="mobile-catalog__name">Эмаль</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-shpon">
+          <span class="mobile-catalog__name">Шпон</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-massiv">
+          <span class="mobile-catalog__name">Массив</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-ekoshpon">
+          <span class="mobile-catalog__name">Экошпон</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-pvh">
+          <span class="mobile-catalog__name">ПВХ</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-polipropilen">
+          <span class="mobile-catalog__name">Полипропилен</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/profildoors/alum">
+          <span class="mobile-catalog__name">Алюминиевые</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/profildoors/alum">
+          <span class="mobile-catalog__name">Стеклянные</span>
+        </span>
+      </li>
+
+      </ul>
+    </div>
+  </div>
+</li>
+
+
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">По стилю</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор дверей по материалу</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-klassika-1">
+          <span class="mobile-catalog__name">Классика</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-modern-1">
+          <span class="mobile-catalog__name">Модерн</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-minimalizm-1">
+          <span class="mobile-catalog__name">Минимализм</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-skandinavskij-1">
+          <span class="mobile-catalog__name">Скандинавский</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-provans-1">
+          <span class="mobile-catalog__name">Прованс</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-hajtek-1">
+          <span class="mobile-catalog__name">Хай Тек</span>
+        </span>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</li>
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">По оттенку</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор дверей по оттенку</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-belyj">
+          <span class="mobile-catalog__name">Белый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-seryj">
+          <span class="mobile-catalog__name">Серый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-korichnevyj">
+          <span class="mobile-catalog__name">Коричневый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-svetlyj">
+          <span class="mobile-catalog__name">Светлый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-temnyj">
+          <span class="mobile-catalog__name">Темный</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-pod-pokrasku">
+          <span class="mobile-catalog__name">Под покраску</span>
+        </span>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</li>
+
+
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">По стоимости</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор дверей по стоимости</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-do-7000-rub">
+          <span class="mobile-catalog__name">До 7 000 руб</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-do-15000-rub">
+          <span class="mobile-catalog__name">от 7 000 руб до 15 000 руб</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-do-25000-rub">
+          <span class="mobile-catalog__name">от 15 000 руб до 25 000 руб</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-do-38000-rub">
+          <span class="mobile-catalog__name">от 25 000 руб до 38 000 руб</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-ot-38000-rub">
+          <span class="mobile-catalog__name">от 38 000 руб</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+</li>
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Системы открывания</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по системам открывания</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/skrytye-dveri">
+        <span class="mobile-catalog__name">Скрытые</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-compack">
+        <span class="mobile-catalog__name">Compack</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-magic">
+        <span class="mobile-catalog__name">Magic</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-dvuhstvorchataja">
+        <span class="mobile-catalog__name">Двухстворчатые</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-knizhka">
+        <span class="mobile-catalog__name">Книжки</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-kupe">
+        <span class="mobile-catalog__name">Купе</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-povorotnaja">
+        <span class="mobile-catalog__name">Поворотная</span>
+      </span>
+    </li>
+    </ul>
+  </div>
+</div>
+</li>
+
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Применение</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Назначенеие дверей</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-v-vannuju">
+        <span class="mobile-catalog__name">Для ванной и туалета</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-v-dom">
+        <span class="mobile-catalog__name">В дом</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-dlja-dachi">
+        <span class="mobile-catalog__name">Для дачи</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri">
+        <span class="mobile-catalog__name">В квартиру</span>
+      </span>
+    </li>
+    </ul>
+  </div>
+</div>
+</li>
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Возможные размеры</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по размерам</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/?ocf=F8S3V71">
+        <span class="mobile-catalog__name">Стандартные (до 2000мм в высоту)</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/?ocf=F8S3V72">
+        <span class="mobile-catalog__name">Не стандартные (до 2300мм в высоту)</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/?ocf=F8S3V73">
+        <span class="mobile-catalog__name">Не стандартные (до 2600мм в высоту)</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/?ocf=F8S3V74">
+        <span class="mobile-catalog__name">Не стандартные (до 3000мм в высоту)</span>
+      </span>
+    </li>
+    </ul>
+  </div>
+</div>
+</li>
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Конструктив двери</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор дверей по конструктиву</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-klassika-patina">
+          <span class="mobile-catalog__name">Классика Патина</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-anglijskij-stil">
+          <span class="mobile-catalog__name">Английский стиль</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-anglijskaja-reshetka-8-okon">
+          <span class="mobile-catalog__name">Английская решетка 8 окон</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-anglijskaja-reshetka-6-okon">
+          <span class="mobile-catalog__name">Английская решетка 6 окон</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-tsargovaja-klassika-31-3-filenki">
+          <span class="mobile-catalog__name">Царговая классика 3-1 (3 филенки)</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-tsargovaja-klassika-21-2-filenki">
+          <span class="mobile-catalog__name">Царговая классика 2-1 (2 филенки)</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/mezhkomnatnye-dveri/dveri-klassika-krug">
+          <span class="mobile-catalog__name">Классика - круг</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+</li>
+</ul>
+  </li>
+  
+
+<li class="visible-xs content-mobile-menu-dveri" id="forkvarccateg">
+
+<ul class="mobile-catalog__list mobile-catalog_main">
+  <li class="mobile-catalog__item has-item">
+  <span class="mobile-item">
+    <span class="mobile-catalog__name">По толщине</span>
+    <span class="mobile-catalog__icon__arrow d-flex">
+      <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+        <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+      </svg>
+    </span>
+  </span>
+  <div class="mobile-catalog catalog-child">
+    <div class="mobile-catalog__panel">
+      <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+        </svg>
+      </button>
+      <div class="mobile-catalog__title">Подбор по толщине</div>
+      <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+        <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+          <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-catalog__inner">
+      <ul class="mobile-catalog__list" id="block-categoryffg-fmobile11900500">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-2-5mm">
+          <span class="mobile-catalog__name">2,5 мм</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-2-35mm">
+          <span class="mobile-catalog__name">2,35 мм</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/kvarzvinilovaja-plitka-3-5mm">
+          <span class="mobile-catalog__name">3,5 мм</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-4mm">
+          <span class="mobile-catalog__name">4 мм</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-4-5mm">
+          <span class="mobile-catalog__name">4,5 мм</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-5-5mm">
+          <span class="mobile-catalog__name">5,5 мм</span>
+        </span>
+      </li>
+
+      </ul>
+    </div>
+  </div>
+</li>
+
+
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Класс износостойкости</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по классу износостойкости</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-32-klass">
+          <span class="mobile-catalog__name">32 класс</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-42-klass">
+          <span class="mobile-catalog__name">42 класс</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-43-klass">
+          <span class="mobile-catalog__name">43 класс</span>
+        </span>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</li>
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">По оттенку</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по оттенку</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-bezhevyj">
+          <span class="mobile-catalog__name">Бежевый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-belenyj">
+          <span class="mobile-catalog__name">Белёный</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-belyj">
+          <span class="mobile-catalog__name">Белый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-vintazh">
+          <span class="mobile-catalog__name">Винтаж</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-zolotistyj">
+          <span class="mobile-catalog__name">Золотистый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-korichnevyj">
+          <span class="mobile-catalog__name">Коричневый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-rozovyj">
+          <span class="mobile-catalog__name">Розовый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-seryj">
+          <span class="mobile-catalog__name">Серый</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-smeshannye-tsveta">
+          <span class="mobile-catalog__name">Смешанные цвета</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/vinilovyj-pol-chernyj">
+          <span class="mobile-catalog__name">Чёрный</span>
+        </span>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</li>
+
+
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Тип соединение</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по типу соединения</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/kvartzvinyl-zamkovaja">
+          <span class="mobile-catalog__name">Замковая</span>
+        </span>
+      </li>
+      <li class="mobile-catalog__item">
+        <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/kvartzvinyl-kleevoj">
+          <span class="mobile-catalog__name">Клеевой</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
+</li>
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Фаска</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по фаске</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/?ocf=F2240S2V1961875087">
+        <span class="mobile-catalog__name">С фаской</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/?ocf=F2240S2V1075468460">
+        <span class="mobile-catalog__name">Без фаски</span>
+      </span>
+    </li>
+    </ul>
+  </div>
+</div>
+</li>
+
+
+
+<li class="mobile-catalog__item has-item">
+<span class="mobile-item">
+  <span class="mobile-catalog__name">Тип рисунка</span>
+  <span class="mobile-catalog__icon__arrow d-flex">
+    <svg width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon icon-arrow">
+      <path d="M5.293 12.293a1 1 0 101.414 1.414l5-5a1 1 0 000-1.414l-5-5a1 1 0 00-1.414 1.414L9.586 8l-4.293 4.293z" fill="currentColor"></path>
+    </svg>
+  </span>
+</span>
+<div class="mobile-catalog catalog-child">
+  <div class="mobile-catalog__panel">
+    <button type="button" aria-label="Вернуться назад" class="clear-button mobile-catalog__back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="icon icon-arrow-left" viewbox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path>
+      </svg>
+    </button>
+    <div class="mobile-catalog__title">Подбор по типу рисунка</div>
+    <button type="button" aria-label="Закрыть каталог" class="clear-button mobile-catalog__close">
+      <svg width="16" height="16" fill="#172033" viewbox="0 0 16 16" class="icon icon-close">
+        <path fill-rule="evenodd" d="M2.293 2.293a1 1 0 011.414 0l10 10a1 1 0 01-1.414 1.414l-10-10a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        <path fill-rule="evenodd" d="M13.707 2.293a1 1 0 00-1.414 0l-10 10a1 1 0 101.414 1.414l10-10a1 1 0 000-1.414z" clip-rule="evenodd"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="mobile-catalog__inner">
+    <ul class="mobile-catalog__list" id="block-category-dmobile11902177">
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/?ocf=F2180S2V2796738340">
+        <span class="mobile-catalog__name">Однополосный</span>
+      </span>
+    </li>
+    <li class="mobile-catalog__item">
+      <span class="mobile-item-two-norm mobile-item mobile-catalog__link" data-link="/kvarcvinilovaya-plitka/?ocf=F2180S2V1832957889">
+        <span class="mobile-catalog__name">Под плитку и камень</span>
+      </span>
+    </li>
+    </ul>
+  </div>
+</div>
+</li>
+</ul>
+  </li>
+
+<div id="pcdvericateg" class="dop_pcinfo_menu">
+  <div class="pccateg_child">
+    <div class="pccateg_title">Стиль двери</div>
+    <ul>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-klassika-1">Классика</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-minimalizm-1">Минимализм</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-modern-1">Модерн</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-provans-1">Прованс</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-skandinavskij-1">Скандинавский</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/?ocf=F2761S2V4294627916">Современный</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-hajtek-1">Хай-тек</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Материал</div>
+    <ul>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-emal">Эмаль</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-shpon">Шпон</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-massiv">Массив</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-ekoshpon">Экошпон</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-pvh">ПВХ</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-polipropilen">Полипропилен</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/profildoors/alum">Алюминиевые</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/profildoors/alum">Стеклянные</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Оттенок</div>
+    <ul>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-belyj">Белый</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-seryj">Серый</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-korichnevyj">Коричневый</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-svetlyj">Светлый</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-temnyj">Темный</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-pod-pokrasku">Под покраску</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Стоимость</div>
+    <ul>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-do-7000-rub">До 7 000 руб</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-do-15000-rub">от 7 000 руб до 15 000 руб</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-do-25000-rub">от 15 000 руб до 25 000 руб</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-do-38000-rub">от 25 000 руб до 38 000 руб</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-ot-38000-rub">от 38 000 руб</a>
+      </li>
+    </ul>
+    <div class="pccateg_title">Конструкция</div>
+    <ul>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-karkasnaja-1">Каркасная</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-tsargovaja-1">Царговая</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Популярные</div>
+    <ul>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-klassika-patina">Классика Патина</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-anglijskij-stil">Английский стиль</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-gljantsevaja-1">Глянцевая</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-belyj-emal">Эмаль белая</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-klassika-krug">Классика - круг</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/skrytye-dveri">Скрытые двери</a>
+      </li>
+      <li>
+        <a href="/mezhkomnatnye-dveri/dveri-s-aluminievoj-kromkoj">С кромкой</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="pcfurnitcateg" class="dop_pcinfo_menu">
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/dveri/profildoors/r-logo.png)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/main_images/manufacturers/brandlogo/ororo.jpg)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/main_images/manufacturers/brandlogo/agb.png)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/frontend/logomanuf/eclisse.jpg)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/frontend/categoryimage/moreli.jpg)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/frontend/logomanuf/Armadillo.jpg)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/frontend/logomanuf/pro-design.png)" class="logo_furmitpc_menu"></a>
+  <a href="#" style="background-image:url(/image/catalog/woodtech_item/frontend/logomanuf/renz.jpg)" class="logo_furmitpc_menu"></a>
+</div>
+
+<div id="pckvarccateg" class="dop_pcinfo_menu">
+  <div class="pccateg_child">
+    <div class="pccateg_title">Толщина</div>
+    <ul>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-2-5mm">2,5 мм</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-2-35mm">2,35 мм</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/kvarzvinilovaja-plitka-3-5mm">3,5 мм</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-4mm">4 мм</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-4-5mm">4,5 мм</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-5-5mm">5,5 мм</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Класс износостойкости</div>
+    <ul>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-32-klass">32 класс</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-42-klass">42 класс</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-43-klass">43 класс</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Оттенок</div>
+    <ul>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-bezhevyj">Бежевый</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-belenyj">Белёный</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-belyj">Белый</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-vintazh">Винтаж</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-zolotistyj">Золотистый</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-korichnevyj">Коричневый</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-rozovyj">Розовый</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-smeshannye-tsveta">Смешанные цвета</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/vinilovyj-pol-chernyj">Чёрный</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Фаска</div>
+    <ul>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/?ocf=F2240S2V1961875087">С фаской</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/?ocf=F2240S2V1075468460">Без фаски</a>
+      </li>
+    </ul>
+    <div class="pccateg_title">Тип соединение</div>
+    <ul>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/kvartzvinyl-zamkovaja">Замковая</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/kvartzvinyl-kleevoj">Клеевой</a>
+      </li>
+    </ul>
+  </div>
+  <div class="pccateg_child">
+    <div class="pccateg_title">Тип рисунка</div>
+    <ul>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/?ocf=F2180S2V2796738340">Однополосный</a>
+      </li>
+      <li>
+        <a href="/kvarcvinilovaya-plitka/?ocf=F2180S2V1832957889">Под плитку и камень</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div id="pcsistemopencateg" class="sistem_pcinfo_menu">
+  <div class="card card-menu-vybor">
+    <a href="/sistema-otkryvaniya-kupe" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/1452952820-1681649530.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Купе</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/sistema-compack" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/1452952800-621121661.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Compack</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/sistema-otkryvaniya-knizhka" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/1452952858-1164568791.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Книжка</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/sistema-otkryvaniya-magic" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/1452952879-1693125004.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Magic</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/povorotnaya-sistema-otkryvaniya" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/1452952900-506942101.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Поворотная</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/sistema-skrytyh-dverej-invisible" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/1452952926-1005964045.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Invisible</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/sistem-skrytyh-dverej-invisible-reverse" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/232020.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Invisible Reverse</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+  <div class="card card-menu-vybor">
+    <a href="/sistema-otkryvaniya-magic2-uniq" class="cardcat-item">
+      <div style="background-image:url(/image/catalog/sistem-open/10032020.jpg)" class="card-img-top"></div>
+      <div class="card-body">
+      <h5 class="card-title">Magic2 Uniq</h5>
+      <span class="btn btn-primary vybor-categ">Выбрать</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+
+var menudveriitem = document.getElementById(fordvericateg);
+$('#fordvericateg').clone(true).unwrap().insertAfter('#block-categoryffg-fmobile11902177');
+
+});
+
+$(document).ready(function () {
+
+var menudveriitem = document.getElementById(forkvarccateg);
+$('#forkvarccateg').clone(true).unwrap().insertAfter('#block-categoryffg-fmobile11900500');
+
+});
+
+$(document).ready(function () {
+
+var menudveriitem = document.getElementById(pcdvericateg);
+$('#pcdvericateg').clone(true).unwrap().prependTo('#block-category-mobile11902177');
+
+});
+
+$(document).ready(function () {
+
+var menudveriitem = document.getElementById(pckvarccateg);
+$('#pckvarccateg').clone(true).unwrap().prependTo('#block-category-mobile11900500');
+
+});
+
+$(document).ready(function () {
+
+var menudveriitem = document.getElementById(pcsistemopencateg);
+$('#pcsistemopencateg').clone(true).unwrap().prependTo('#block-category-mobile11902197');
+
+});
+
+$(document).ready(function () {
+
+var menudveriitem = document.getElementById(pcfurnitcateg);
+$('#pcfurnitcateg').clone(true).unwrap().prependTo('#block-category-mobile11902204');
+
+});
+</script>
+<script></script>

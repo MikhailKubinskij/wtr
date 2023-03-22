@@ -1,0 +1,160 @@
+<div data-steps="steps-{{ item_id }}" id="steps-{{ item_id }}">
+    <div class="steps-top">
+        {% if heading_status %} <h4>{{ name }}</h4> {% endif %}
+        {{ about }}
+    </div>
+
+
+
+
+
+
+
+<div class="tabs">
+   
+   <ul class="tab-header">
+            {% for k, question in list  %}
+                <li class="tab-header__item js-tab-trigger {% if k==0 %} active {% endif %}" data-tab="ldeddv-popup-{{ item_id~'-'~k }}"><span class="step-name">{{ question.title }}</span></li>
+            {% endfor %}
+   </ul>
+   
+   <ul class="tab-content">
+          {% for k, question in list  %}
+              <li class="tab-content__item showfullcontcat js-tab-content {% if k==0 %} active {% endif %}" data-tab="ldeddv-popup-{{ item_id~'-'~k }}">
+                 {% if question.thumb %}
+                        {% if question.link %}
+                            <a href="{{ question.link }}"><img src="{{ question.thumb }}" alt="{{ question.title }}" title="{{ question.title }}"></a>
+                        {% else %}
+                            <img src="{{ question.thumb }}" alt="{{ question.title }}" title="{{ question.title }}">
+                        {% endif %}
+                        {% endif %}
+                        {{ question.text }}
+                        {% if question.module %}
+                        <div>{{ question.module }}</div>
+                        {% endif %}
+              </li>
+            {% endfor %}
+   </ul>
+</div>
+
+
+<script type="text/javascript">
+    $('.js-tab-trigger').click(function() {
+   var id = $(this).attr('data-tab'),
+       content = $('.js-tab-content[data-tab="'+ id +'"]');
+   
+   $('.js-tab-trigger.active').removeClass('active');
+   $(this).addClass('active');
+   
+   $('.js-tab-content.active').removeClass('active');
+   content.addClass('active');
+
+  $( ".js-tab-content.active'" ).fadeIn( "slow", function() {
+    // Animation complete
+  });
+
+});
+
+  
+</script>
+
+
+
+
+
+
+
+</div>
+
+
+
+<style>
+.tabs {
+   width: 100%;
+}
+
+/* Стили для списка вкладок */
+.tab-header {
+   list-style: none;
+   padding-left: 0;
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   margin: 0;
+}
+
+/* Стили для вкладки */
+.tab-header__item {
+   padding: 10px 20px;
+   margin-right: 5px;
+   cursor: pointer;
+   border: 1px solid #ddd;
+   border-bottom: none;
+}
+
+/* Стили для активной вкладки */
+.tab-header__item.active {
+   color: #585858;
+   position: relative;
+   top: 1px;
+   background-color: #fff;
+   border-color: #585858;
+  
+}
+
+/* Стиль для списка контейнеров с содержимым вкладок */
+.tab-content {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+
+/* Стили для контейнера с содержимым вкладки */
+.tab-content__item {
+   display: none;
+   padding: 20px;
+   border: 1px solid #585858;
+}
+
+/* Стили для активного контейнера вкладки */
+.tab-content__item.active {
+   display: block;
+}
+.tab-content__item .rb-gallery-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+
+
+</style>
+
+
+
+
+<script><!--
+$(document).ready(function(){
+
+  $('.rb-gallery-0 .rb-gallery-list').rbOwlCarousel({
+    margin:10,
+    nav:true,
+    responsiveClass:true,
+    responsive:{
+      0:{
+        items: 12 / {{ col_xs }} 
+      },
+      768:{
+        items: 12 / {{ col_sm }} 
+      },
+      992:{
+        items:12 / {{ col_md }} 
+      },
+      1200:{
+        items:12 / {{ col_lg }} 
+      }
+    }
+  }) 
+});
+
+
+</script>

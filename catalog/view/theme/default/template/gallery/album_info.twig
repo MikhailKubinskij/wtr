@@ -1,0 +1,174 @@
+{{ header }}
+<div class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+      <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="row">{{ column_left }}
+    {% if column_left  and  column_right %}
+      {% set class = 'col-sm-6' %}
+    {% elseif  column_left  or  column_right %}
+      {% set class = 'col-sm-9' %}
+    {% else %}
+      {% set class = 'col-sm-12' %}
+    {% endif %} 
+    <div id="content" class="{{ class }}">
+      {{ content_top }}
+      
+      <div class="zoom-gallery">
+
+
+</div>
+<script>
+$(document).ready(function() {
+	$('.zoom-gallery').magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		closeOnContentClick: false,
+		closeBtnInside: false,
+		mainClass: 'mfp-with-zoom mfp-img-mobile',
+		image: {
+			verticalFit: true,
+			titleSrc: function(item) {
+				return item.el.attr('title') + ' &middot; <a class="image-source-link" href="'+item.el.attr('data-source')+'" target="_blank">image source</a>';
+			}
+		},
+		gallery: {
+			enabled: true
+		},
+		zoom: {
+			enabled: true,
+			duration: 300, // don't foget to change the duration also in CSS
+			opener: function(element) {
+				return element.find('img');
+			}
+		}
+		
+	});
+});
+</script>
+<style>
+.image-source-link {
+	color: #98C3D1;
+}
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+	opacity: 0;
+	-webkit-backface-visibility: hidden;
+	/* ideally, transition speed should match zoom duration */
+	-webkit-transition: all 0.3s ease-out; 
+	-moz-transition: all 0.3s ease-out; 
+	-o-transition: all 0.3s ease-out; 
+	transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+		opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+		opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container, 
+.mfp-with-zoom.mfp-removing.mfp-bg {
+	opacity: 0;
+}
+</style>
+      
+      
+      
+      <h1 class="album-title" style="font-family: {{ heading_title_font }}; font-size: {{ heading_title_size }}px;">{{ heading_title }}</h1>
+        
+        {% if thumb  or  images %}
+          <div class="album-wall zoom-gallery">
+            {% if thumb %}
+              <div class="item-grid-album-item">
+                <div class="og-album-0-3">
+                    <a class="popup-pict" href="{{ popup }}" title="{{ heading_title }}" data-source="{{ popup }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" /></a>
+                </div>
+              </div>
+            {% endif %}
+            {% if images %}
+              {% for image in images %}
+                <div class="item-grid-album-item">
+                  <div class="og-album-0-3">
+                      <a class="popup-pict" href="{{ image.popup }}" title="{{ image.name }}" data-source="{{ popup }}"> <img src="{{ image.thumb }}" title="{{ image.name }}" alt="{{ image.name }}" /></a>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          </div>
+        {% endif %}
+        
+      <div class="album-description">{{ description }}</div>
+
+              <div class="form_gallery">
+<div class="title_galleryform">Получите коммерческое предложение на {{ heading_title }}</div>
+<form id="forma-gallery" class="forma-gal">
+<!-- Hidden Required Fields -->
+<input type="hidden" name="form_subject" value="Форма - Заказ звонка (SiteNM)">
+<input type="hidden" name="aurl" value="">
+<input type="hidden" name="project_name" value="SiteNM">
+<input type="hidden" name="form_subject" value="Заказ звонка (SiteNM)">
+<!-- END Hidden Required Fields -->
+<div class="forms-inputgallery inputgall_first inputs-forma">
+<input type="text" name="name" class="chcksp" placeholder="Ваше имя..." maxlength="25">
+<input type="text" name="text" class="chcksp" placeholder="Ваше имя..." maxlength="25">
+<input type="text" name="tname" placeholder="Ваше имя..." maxlength="25">
+</div>
+<!-- END Hidden Required Fields -->
+<div class="forms-inputgallery inputs-forma">
+<input class="phone_mask" type="text" name="Phone" placeholder="Ваш телефон..." required=""><br>
+</div>
+<div class="form_galersocial">
+  
+  <input type="checkbox" id="watsap_gallery" class="input_social">
+  <label for="watsap_gallery">
+    <div class="gallery_social">
+      <img src="/image/catalog/woodtech_item/frontend/bgsection/whatsapp-svgrepo-com.svg">
+    </div>
+  </label>
+  <input type="checkbox" id="telegram_gallery" class="input_social">
+  <label for="telegram_gallery">
+    <div class="gallery_social">
+      <img src="/image/catalog/woodtech_item/frontend/bgsection/telegram_6xl6mvducz08.svg">
+    </div>
+  </label>
+  <input type="checkbox" id="telephone_gallery" class="input_social">
+  <label for="telephone_gallery">
+    <div class="gallery_social">
+      <img src="/image/catalog/woodtech_item/frontend/bgsection/telephone_z2i30cod7m2k.svg">
+    </div>
+  </label>
+</div>
+<button class="button_galleryform btn">Отправить</button>
+</form>
+<script>
+$(document).ready(function() {
+$("#forma-gallery").submit(function() {
+var th = $(this);
+$.ajax({
+	type: "POST",
+	url: "mail.php",
+	data: th.serialize()
+}).done(function() {
+	alert("Благодарим за заявку!");
+	setTimeout(function() {
+		// Done Functions
+		th.trigger("reset");
+	}, 1000);
+});
+return false;
+});
+});
+</script>
+</div>
+                                
+
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div> 
+
+{{ footer }}

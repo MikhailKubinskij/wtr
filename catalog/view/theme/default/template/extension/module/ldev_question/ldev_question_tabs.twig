@@ -1,0 +1,37 @@
+<div>
+    {% if heading_status %} <h4>{{ name }}</h4> {% endif %}
+    {{ about }}
+
+
+
+
+
+<div class="accordion" id="accordionExample">
+        {% for k, question in list  %}
+  <div class="accordion-item  {% if k==0 %} active {% endif %}">
+    <h2 class="accordion-header" id="tab-{{ item_id~'-'~k }}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="tab-{{ item_id~'-'~k }}">
+        Accordion Item #1
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse {% if k==0 %} show {% endif %}" aria-labelledby="tab-{{ item_id~'-'~k }}" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+            {{ question.text }}
+            <?php if($question['module']) { ?>
+            {%  if question.module %}
+            <div>{{ question.module }}</div>
+            {% endif %}
+      </div>
+    </div>
+  </div>
+        {% endfor %}
+
+</div>
+
+
+
+
+
+
+</div>
+

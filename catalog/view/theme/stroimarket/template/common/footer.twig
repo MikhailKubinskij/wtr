@@ -1,0 +1,602 @@
+</div>
+
+<section class="footer-map">
+
+
+
+<div class="container">
+<!--Контакты блок --></div>
+</section>
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="site-footer__inner">
+      <div class="container">
+        <div class="footer-column">
+          <div class="footer-column__block footer-column__list">
+            <div class="footer-column__list-item footer-column__information">
+              <div class="footer-column__title">
+                Каталог</div>
+                    <ul class="bottom-menu">
+                          <li>
+                            <a href="/mezhkomnatnye-dveri">Межкомнатные двери</a>
+                          </li>
+                          <li>
+                            <a href="/vhodnye-dveri">Входные двери</a>
+                          </li>
+                          <li>
+                            <a href="/sistemy-otkryvaniya">Системы открывания</a>
+                          </li>
+                          <li>
+                            <a href="/furnitura">Дверная фурнитура</a>
+                          </li>
+                          <li>
+                            <a href="/kvarcvinilovaya-plitka">Кварцвиниловая плитка</a>
+                          </li>
+                          <li>
+                            <a href="/laminat">Ламинат</a>
+                          </li>
+                          <li>
+                            <a href="/plintus">Плинтус</a>
+                          </li>
+                    </ul>
+
+          
+        </div>
+
+        <div class="footer-column__list-item footer-column__service">
+          <div class="footer-column__title pust-footer-column__title">Системы открывания</div>
+          <ul class="bottom-menu bottom-menu2child-footer">
+                          <li>
+                            <a href="/mezhkomnatnye-dveri/skrytye-dveri">Скрытые</a>
+                          </li>
+                          <!--<li>
+                            <a href="/sistema-otkryvaniya-kupe">Двухстворчатые</a>
+                          </li>-->
+                          <li>
+                            <a href="/sistema-otkryvaniya-kupe">Купе</a>
+                          </li>
+                          <li><a href="/sistemy-otkryvaniya/po-tipu/razdvizhnye-sistemy-1">Раздвижная</a></li>
+                            <li><a href="/sistemy-otkryvaniya/po-tipu/penaly">Пенал</a></li>
+                            <li><a href="/mezhkomnatnye-dveri/dveri-knizhka">Книжка</a></li>
+                            <li><a href="/mezhkomnatnye-dveri/dveri-povorotnaja">Роторная (поворотная)</a></li>
+                            <li><a href="/mezhkomnatnye-dveri/dveri-skrytaja-invisible">Скрытая</a></li>
+                            <li><a href="/mezhkomnatnye-dveri/dveri-magic">Magic</a></li>
+                            <li><a href="/mezhkomnatnye-dveri/dveri-compack">Compack</a></li>
+                          
+
+
+          </ul>
+        </div>
+        <div class="footer-column__list-item footer-column__extra">
+          <div class="footer-column__title">{{ text_information }}</div>
+          <ul class="bottom-menu">
+            {% for information in informations %}
+              <li>
+                <a href="{{ information.href }}">{{ information.title }}</a>
+              </li>
+            {% endfor %}
+                        <li>
+              <a href="{{ account }}">{{ text_account }}</a>
+            </li>
+            <li>
+              <a href="{{ wishlist }}">{{ text_wishlist }}</a>
+            </li>
+            <li>
+              <a href="{{ contact }}">{{ text_contact }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-bottom">
+          <div class="footer-bottom__powered">
+            <!--<img src="image/catalog/woodtech_item/frontend/paymethod.png" style="max-width:100%;">-->
+            <p>Dveri-i.ru. Межкомнатные двери.</p>
+            <p>Информация на сайте ориентировочная и не является публичной офертой</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-column__block footer-column__contacts">
+        <div class="footer-column__phone-contacts">
+          <div class="footer-column__title">{{ text_contacts }}</div>
+          <div class="footer-column__phone column-contacts">
+
+            <div class="blocklogo-footer hidden-xs">
+              <img src="/image/catalog/dveri-tochka-png-white.png" class="img-footer-logo">
+              <div class="footer_descrip_text">16 фабрик межкомнатных дверей в одном месте</div>
+            </div>
+
+            <div class="phone-body telephone-block">
+              <div class="mobile-information__icon">
+                    {% if contacts_icon %}
+                      <div class="icon-contacts phone-icon">
+                        <i class="fi fi-rr-phone-call"></i>
+                      </div>
+                    {% endif %}
+              </div>
+              <div class="phone_footermain">
+              <div class="phone-bl-h">
+                <a href="tel:+79266192289">
+                    {{ telephonef }}
+                </a>
+              </div>
+              <div class="phone-bl-h-callback">
+                <div class="header-phone-callback">
+                  
+                    <a class="popup-with-form open-popup-link" href="#test-form">Заказать звонок</a>
+
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+
+          {% if config_footer_open %}
+            {% if open %}
+              <div class="footer-column__open column-contacts">
+                {% if contacts_icon %}
+                  <div class="icon-contacts open-icon icon_footer_info">
+                    <i class="fi fi-rr-clock"></i>
+                  </div>
+                {% endif %}
+                <div>{{ open }}</div>
+              </div>
+            {% endif %}
+          {% endif %}
+          {% if config_footer_email %}
+            {% if email %}
+              <div class="footer-column__email column-contacts">
+                {% if contacts_icon %}
+                  <div class="icon-contacts email-icon">
+                    <i class="fi fi-rr-envelope"></i>
+                  </div>
+                {% endif %}
+                {{ email }}
+              </div>
+            {% endif %}
+          {% endif %}
+        </div>
+        {% if config_payment_icon %}
+          <div class="footer-column__payment">
+            <div class="footer-column__title">{{ text_accept_payment }}</div>
+            <div class="footer_pay_img">
+            <img src="/image/payment/visa.png" alt="Visa">
+            <img src="/image/payment/mastercard.png" alt="MasterCard">
+            <img src="/image/payment/mir.png" alt="МИР">
+          </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div></div></div></footer>
+
+<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }} k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(92060828, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/92060828" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+
+<script>document.addEventListener('DOMContentLoaded', function () {
+$('.section-shops').readmore({maxHeight: 240, moreLink: '<a href="#" class="viev-all-prod"><span class="viev-block-prod footer-shops-more">Показать все салоны</span></a>', lessLink: '<a href="#" class="viev-all-prod"><span class="viev-block-prod footer-shops-more">Скрыть адреса</span></a>'});
+});
+$( ".sidebarblock-item-a" ).click(function() {
+
+
+
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+if($(this).attr('idoptionvalue')) {
+    setCookie('idoptionvalue', $(this).attr('idoptionvalue'), 8);
+    let x = document.cookie;
+    alert(x);
+} else {
+    alert($(this).attr('alt'));
+
+}
+
+
+
+
+
+  
+});
+if($(".ocf-selected-header").length) {
+  var contactHTML = $('.ocf-description-top').html();
+  console.log(contactHTML);
+  $('.galleryblockagtmarg').remove();
+  $('.opisanije-ser-second').empty();
+  $('.agtsectiontext_main1').remove();
+  $('.mainbrandsectionagt>blockquote').empty();
+  $('h1').after(сontactHTML);
+  // exists
+}
+
+</script><script>$(document).ready(function () {
+$('.popup-with-move-anim').magnificPopup({
+type: 'inline',
+fixedContentPos: false,
+fixedBgPos: true,
+overflowY: 'auto',
+closeBtnInside: true,
+preloader: false,
+midClick: true,
+removalDelay: 300,
+mainClass: 'my-mfp-slide-bottom'
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+$('.gallery_contact').magnificPopup({
+   delegate: 'a',
+  type: 'image',
+  closeOnContentClick: false,
+  closeBtnInside: false,
+  mainClass: 'mfp-with-zoom mfp-img-mobile',
+  gallery:{
+    enabled:true
+  },
+  zoom: {
+        enabled: true,
+        duration: 300, // don't foget to change the duration also in CSS
+    }
+});
+});
+</script>
+<script>
+$(document).ready(function () {
+$('.carousel_contact').swiper({
+            slidesPerView: "auto",
+            spaceBetween: 3,
+            mode: 'horizontal',
+            breakpoints: {
+            640: {
+            slidesPerView: 1
+            },
+            768: {
+            slidesPerView: "auto"
+            },
+            1024: {
+            slidesPerView: "auto"
+            }
+            },
+            nextButton: '.swiper-next',
+            prevButton: '.swiper-prev',
+            autoplay: 9500,
+            loop: true,
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true
+            },
+            pagination: {
+            el: ".swiper-pagination",
+            clickable: true
+            }
+
+            });
+});
+
+{% for script in scripts %}<script src="{{ script }}"></script>{% endfor %}</div>{% if top_button %}<!-- Кнопка вверх -->
+<div class="scroll-fixed scroll-up"><svg viewbox="0 0 8 11" class="ToTopIcon" width="8" height="11"><path d="M0 3.99h3V11h2V3.99h3L4 0 0 3.99z"></path></svg>
+</div>{% endif %}</div>
+
+
+<script>
+$(document).ready(function ($) {
+$('.open-popup-link').magnificPopup({type: 'inline', removalDelay: 300, mainClass: 'mfp-zoom-in', midClick: true, fixedContentPos: true});
+});
+$(document).ready(function () {
+$("form").submit(function () {
+var th = $(this);
+var datasucces = "Благодарим за заявку";
+var base_urlwtr = window.location.origin;
+var base_urlwtrmail = base_urlwtr + "/woodtechnotification/mail.php";
+$.ajax({type: "POST", url: base_urlwtrmail, data: th.serialize()}).done(function () {
+setTimeout(function () {
+th.trigger("reset");
+}, 1000);
+$('#succesblock').html(base_urlwtrmail);
+setTimeout(function () {
+$('#succesblock').html('');
+}, 2500);
+});
+return false;
+});
+});
+$(document).ready(function () {
+$('#tekurl').val(window.location);
+});</script><style>.hgnhf {
+  display: none;
+}
+#newwwwexmp {
+  color: #282828;
+  border-radius: 5px;
+  background: #FFF;
+  padding: 0px;
+}
+#newwwwexmp h4 {
+  color: #000;
+  font-size: 20px !important;
+  margin: 0px 0 25px 0px;
+}
+
+#newdirect {
+  color: #282828;
+  border-radius: 5px;
+  background: #FFF;
+  padding: 25px 20px;
+}
+#newdirect h4 {
+  color: #000;
+  font-size: 20px !important;
+  margin: 0px 0 25px 0px;
+}
+
+.white-popup {
+  position: relative;
+  margin: 0 auto;
+}
+.white-popup h4{
+  font-size: 18px;
+  margin: 0px 0px 20px 0px;
+}
+.formdesignwtr input {
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  padding: 12px 13px;
+  background: #f3f3f3;
+  color: #000;
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 9%);
+}
+.formdesignwtr input::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: #858585;
+}
+.formdesignwtr input::-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #858585;
+  opacity: 1;
+}
+.formdesignwtr input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #858585;
+  opacity: 1;
+}
+.formdesignwtr input::-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #858585;
+}
+.formdesignwtr input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #858585;
+}
+.formdesignwtr input::placeholder {
+  /* Most modern browsers support this now. */
+  color: #858585;
+}
+
+.mfp-close-btn-in .mfp-close {
+  color: ##4e4e4e;
+}
+.formatformbutton {
+  background: #000;
+  color: #FFF;
+  border-radius: 5px;
+  width: 100%;
+  padding: 8px 0px;
+  max-width: 170px;
+}
+.formdesignwtr {
+  text-align: center;
+}
+.my-mfp-zoom-in .zoom-anim-dialog {
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+}
+/* animate in */
+.my-mfp-zoom-in.mfp-ready .zoom-anim-dialog {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+/* animate out */
+.my-mfp-zoom-in.mfp-removing .zoom-anim-dialog {
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+  opacity: 0;
+}
+/* Dark overlay, start state */
+.my-mfp-zoom-in.mfp-bg {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+/* animate in */
+.my-mfp-zoom-in.mfp-ready.mfp-bg {
+  opacity: 0.8;
+}
+/* animate out */
+.my-mfp-zoom-in.mfp-removing.mfp-bg {
+  opacity: 0;
+}
+.my-mfp-slide-bottom .zoom-anim-dialog {
+  opacity: 0;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  -webkit-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+  -moz-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+  -ms-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+  -o-transform: translateY(-20px) perspective(600px) rotateX(10deg);
+  transform: translateY(-20px) perspective(600px) rotateX(10deg);
+}
+/* animate in */
+.my-mfp-slide-bottom.mfp-ready .zoom-anim-dialog {
+  opacity: 1;
+  -webkit-transform: translateY(0) perspective(600px) rotateX(0);
+  -moz-transform: translateY(0) perspective(600px) rotateX(0);
+  -ms-transform: translateY(0) perspective(600px) rotateX(0);
+  -o-transform: translateY(0) perspective(600px) rotateX(0);
+  transform: translateY(0) perspective(600px) rotateX(0);
+}
+/* animate out */
+.my-mfp-slide-bottom.mfp-removing .zoom-anim-dialog {
+  opacity: 0;
+  -webkit-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+  -moz-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+  -ms-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+  -o-transform: translateY(-10px) perspective(600px) rotateX(10deg);
+  transform: translateY(-10px) perspective(600px) rotateX(10deg);
+}
+/* Dark overlay, start state */
+.my-mfp-slide-bottom.mfp-bg {
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out;
+  transition: opacity 0.3s ease-out;
+}
+/* animate in */
+.my-mfp-slide-bottom.mfp-ready.mfp-bg {
+  opacity: 0.8;
+}
+/* animate out */
+.my-mfp-slide-bottom.mfp-removing.mfp-bg {
+  opacity: 0;
+}</style>
+
+
+
+<!-- form itself -->
+<form id="test-form" class="mfp-hide white-popup-block category-popup-form">
+	<div class="white-popup formdesignwtr"><form id="wtrform"><h4>Заказать звонок</h4><!-- Hidden Required Fields --><div id="succesblock"></div><input type="hidden" name="hidden_example_field" value="Hidden Field"><input type="hidden" name="form_subject" value="Тестовая форма (Название)"><inputtype="hidden" name="tekurl" value="Ccs" id="tekurl"><!-- END Hidden Required Fields --><input type="text" name="Name" value='proshel' placeholder="You name..." class="hgnhf"><input type="text" name="Phone" value='proshel' placeholder="Введите Ваш телефон..." class="hgnhf phone_mask"><input type="text" name="Telephone" value='proshel' placeholder="Введите Ваш телефон..." class="hgnhf"><input id="phone2" class="phone_mask" type="tel" name="wtr-phn" placeholder="Введите Ваш телефон..."><input type="text" name="wtr-nme" placeholder="You name..." class="hgnhf"><input type="text" name="wtr-nameuser" placeholder="Ваше имя"><button class="formatformbutton">Отправить</button></form></div>
+</form>
+
+<form id="zamer_form" class="mfp-hide white-popup-block category-popup-form">
+	<div class="white-popup formdesignwtr"><form id="wtrformza"><h4>Заказать замер</h4><!-- Hidden Required Fields --><div id="succesblockzd"></div><input type="hidden" name="hidden_example_field" value="Hidden Field"><input type="hidden" name="form_subject" value="Тестовая форма (Название)"><inputtype="hidden" name="tekurl" value="Ccs" id="tekurl"><!-- END Hidden Required Fields --><input type="text" name="Name" value='proshel' placeholder="You name..." class="hgnhf"><input type="text" name="Phone" value='proshel' placeholder="Введите Ваш телефон..." class="hgnhf phone_mask"><input type="text" name="Telephone" value='proshel' placeholder="Введите Ваш телефон..." class="hgnhf"><input id="phone3" class="phone_mask" type="tel" name="wtr-phn" placeholder="Введите Ваш телефон..."><input type="text" name="wtr-nme" placeholder="You name..." class="hgnhf"><input type="text" name="wtr-nameuser" placeholder="Ваше имя"><button class="formatformbutton">Отправить</button></form></div>
+</form>
+
+<script>
+$(document).ready(function() {
+$(".phone_mask").mask("+7(999)999-99-99", {placeholder: "+7(999)999-99-99"});
+});
+</script>
+<script>
+
+$(document).ready(function() {
+
+
+
+
+	//E-mail Ajax Send
+	$("#test-form").submit(function() { //Change
+		var th = $(this);
+		$.ajax({
+			type: "POST",
+			url: "vremmail.php", //Change
+			data: th.serialize()
+		}).done(function() {
+			alert("Thank you!");
+			setTimeout(function() {
+				// Done Functions
+				th.trigger("reset");
+			}, 1000);
+		});
+		return false;
+	});
+	//E-mail Ajax Send
+	$("#zamer_form").submit(function() { //Change
+		var th = $(this);
+		$.ajax({
+			type: "POST",
+			url: "vremmail.php", //Change
+			data: th.serialize()
+		}).done(function() {
+			alert("Thank you!");
+			setTimeout(function() {
+				// Done Functions
+				th.trigger("reset");
+			}, 1000);
+		});
+		return false;
+	});
+
+	$('.popup-with-form').magnificPopup({
+		type: 'inline',
+		preloader: false,
+		focus: '#name',
+		mainClass: 'mfp-with-zoom mfp-img-mobile',
+
+		// When elemened is focused, some mobile browsers in some cases zoom in
+		// It looks not nice, so we disable it:
+
+		callbacks: {
+			beforeOpen: function() {
+				if($(window).width() < 700) {
+					this.st.focus = false;
+				} else {
+					this.st.focus = '#name';
+				}
+			}
+		}
+	});
+});
+</script>
+<style>.image-source-link {
+	color: #98C3D1;
+}
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+	opacity: 0;
+	-webkit-backface-visibility: hidden;
+	/* ideally, transition speed should match zoom duration */
+	-webkit-transition: all 0.3s ease-out; 
+	-moz-transition: all 0.3s ease-out; 
+	-o-transition: all 0.3s ease-out; 
+	transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+		opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+		opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container, 
+.mfp-with-zoom.mfp-removing.mfp-bg {
+	opacity: 0;
+}
+</style>
+<script src="catalog/view/javascript/jquery/swiper/js/swiper-bundle.min.js"></script>
+<script src="catalog/view/javascript/jquery.mask.min.js"></script>
+</body></html>
